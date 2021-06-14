@@ -1,0 +1,39 @@
+{
+  "schemaVersion": 1,
+  "id": "maptooltip",
+  "version": "${version}",
+
+  "name": "Map Tooltip",
+  "description": "View maps from your inventory",
+  "authors": [
+    "VendoAU"
+  ],
+  "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/map-tooltip",
+    "sources": "https://github.com/VendoAU/MapTooltip",
+    "issues": "https://github.com/VendoAU/MapTooltip/issues"
+  },
+
+  "license": "MIT",
+  "icon": "assets/maptooltip/icon.png",
+
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "com.vendoau.maptooltip.MapTooltip"
+    ]
+  },
+  "mixins": [
+    "maptooltip.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.17.x",
+    "java": ">=16"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
