@@ -16,7 +16,10 @@ import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.IExtensionPoint;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fmllegacy.network.FMLNetworkConstants;
 
 @Mod("maptooltip")
 @Mod.EventBusSubscriber
@@ -25,6 +28,11 @@ public class MapTooltip {
     private static final Minecraft mc = Minecraft.getInstance();
     private static final ResourceLocation MAP_BACKGROUND = new ResourceLocation("textures/map/map_background.png");
     private static float yOffset;
+
+    public MapTooltip() {
+        // Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
+        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+    }
 
     @SubscribeEvent
     public static void onItemTooltip(ItemTooltipEvent event) {
