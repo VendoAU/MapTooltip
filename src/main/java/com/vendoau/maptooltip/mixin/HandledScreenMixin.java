@@ -53,7 +53,7 @@ public class HandledScreenMixin {
         Tessellator tessellator = Tessellator.getInstance();
         BufferBuilder buffer = tessellator.getBuffer();
         buffer.begin(VertexFormat.DrawMode.QUADS, VertexFormats.POSITION_TEXTURE);
-        Matrix4f matrix4f = matrices.peek().getModel();
+        Matrix4f matrix4f = matrices.peek().getPositionMatrix();
         buffer.vertex(matrix4f, -7, 135, 0).texture(0, 1).next();
         buffer.vertex(matrix4f, 135, 135, 0).texture(1, 1).next();
         buffer.vertex(matrix4f, 135, -7, 0).texture(1, 0).next();
