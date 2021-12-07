@@ -2,6 +2,7 @@ package com.vendoau.maptooltip;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
+import com.mojang.datafixers.util.Pair;
 import com.mojang.math.Matrix4f;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -13,13 +14,13 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
-import net.minecraftforge.client.event.GuiScreenEvent;
+import net.minecraftforge.client.event.ScreenEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.IExtensionPoint;
 import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fmllegacy.network.FMLNetworkConstants;
+import net.minecraftforge.network.NetworkConstants;
 
 @Mod("maptooltip")
 @Mod.EventBusSubscriber
@@ -31,7 +32,7 @@ public class MapTooltip {
 
     public MapTooltip() {
         // Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
-        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> FMLNetworkConstants.IGNORESERVERONLY, (a, b) -> true));
+        ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
     }
 
     @SubscribeEvent
@@ -43,14 +44,14 @@ public class MapTooltip {
     }
 
     @SubscribeEvent
-    public static void postDrawScreen(GuiScreenEvent.DrawScreenEvent.Post event) {
-        if (mc.player != null && mc.level != null && event.getGui() instanceof AbstractContainerScreen<?> screen) {
+    public static void postDrawScreen(ScreenEvent.DrawScreenEvent.Post event) {
+        if (mc.player != null && mc.level != null && event.getScreen() instanceof AbstractContainerScreen<?> screen) {
             Slot slot = screen.getSlotUnderMouse();
             if (slot == null) return;
             ItemStack itemStack = slot.getItem();
             if (itemStack.getItem() == Items.FILLED_MAP) {
                 Integer id = MapItem.getMapId(itemStack);
-                drawMap(event.getMatrixStack(), id, event.getMouseX(), event.getMouseY());
+                drawMap(event.getPoseStack(), id, event.getMouseX(), event.getMouseY());
             }
         }
     }
