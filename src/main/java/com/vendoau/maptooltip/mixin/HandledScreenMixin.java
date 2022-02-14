@@ -47,7 +47,7 @@ public class HandledScreenMixin {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, MAP_BACKGROUND);
 
-        matrices.translate(x + xOffset, y + yOffset, 300);
+        matrices.translate(x + xOffset, y + yOffset, 500);
         matrices.scale(0.5f, 0.5f, 0);
 
         Tessellator tessellator = Tessellator.getInstance();
