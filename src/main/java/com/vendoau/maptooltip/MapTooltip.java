@@ -64,7 +64,7 @@ public class MapTooltip {
         RenderSystem.setShader(GameRenderer::getPositionTexShader);
         RenderSystem.setShaderTexture(0, MAP_BACKGROUND);
 
-        matrixStack.translate(x + xOffset, y + yOffset, 300);
+        matrixStack.translate(x + xOffset, y + yOffset, 500);
         matrixStack.scale(0.5F, 0.5F, 0);
 
         Tesselator tesselator = Tesselator.getInstance();
