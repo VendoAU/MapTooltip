@@ -1,0 +1,12 @@
+modLoader="javafml"
+loaderVersion="[41,)"
+license="MIT"
+issueTrackerURL="https://github.com/VendoAU/MapTooltip/issues"
+
+[[mods]]
+  modId="maptooltip"
+  version="${version}"
+  displayName="Map Tooltip"
+  logoFile="logo.png"
+  authors="VendoAU"
+  description="View maps from your inventory"

@@ -1,0 +1,23 @@
+{
+  "schemaVersion": 1,
+  "id": "maptooltip",
+  "version": "${version}",
+  "name": "Map Tooltip",
+  "description": "View maps from your inventory",
+  "authors": [
+    "VendoAU"
+  ],
+  "license": "MIT",
+  "icon": "assets/maptooltip/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "com.vendoau.maptooltip.MapTooltip"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.7",
+    "minecraft": "~1.19",
+    "java": ">=17"
+  }
+}
