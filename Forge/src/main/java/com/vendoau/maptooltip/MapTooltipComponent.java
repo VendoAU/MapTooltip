@@ -18,13 +18,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.NotNull;
 
-public class MapComponent implements ClientTooltipComponent, TooltipComponent {
+public class MapTooltipComponent implements ClientTooltipComponent, TooltipComponent {
 
     private final ResourceLocation bg = new ResourceLocation("textures/map/map_background.png");
 
     private final ItemStack map;
 
-    public MapComponent(ItemStack map) {
+    public MapTooltipComponent(ItemStack map) {
         this.map = map;
     }
 
@@ -49,9 +49,9 @@ public class MapComponent implements ClientTooltipComponent, TooltipComponent {
         poseStack.pushPose();
         poseStack.translate(x + 3.2F, y + 3.2F, 401);
         poseStack.scale(0.45F, 0.45F, 1);
-        MultiBufferSource.BufferSource multibuffersource$buffersource = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
-        Minecraft.getInstance().gameRenderer.getMapRenderer().render(poseStack, multibuffersource$buffersource, id, savedData, true, 15728880);
-        multibuffersource$buffersource.endBatch();
+        MultiBufferSource.BufferSource immediate = MultiBufferSource.immediate(Tesselator.getInstance().getBuilder());
+        Minecraft.getInstance().gameRenderer.getMapRenderer().render(poseStack, immediate, id, savedData, true, 15728880);
+        immediate.endBatch();
         poseStack.popPose();
     }
 

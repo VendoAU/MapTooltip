@@ -56,9 +56,9 @@ public class MapTooltipComponent implements TooltipComponent {
         matrices.push();
         matrices.translate(x + 3.2F, y + 3.2F, 401);
         matrices.scale(0.45F, 0.45F, 1);
-        VertexConsumerProvider.Immediate multibuffersource$buffersource = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
-        MinecraftClient.getInstance().gameRenderer.getMapRenderer().draw(matrices, multibuffersource$buffersource, id, state, true, 15728880);
-        multibuffersource$buffersource.draw();
+        VertexConsumerProvider.Immediate immediate = VertexConsumerProvider.immediate(Tessellator.getInstance().getBuffer());
+        MinecraftClient.getInstance().gameRenderer.getMapRenderer().draw(matrices, immediate, id, state, true, 15728880);
+        immediate.draw();
         matrices.pop();
     }
 

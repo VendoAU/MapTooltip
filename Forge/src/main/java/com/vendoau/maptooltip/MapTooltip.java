@@ -23,7 +23,7 @@ public class MapTooltip {
         // Make sure the mod being absent on the other network side does not cause the client to display the server as incompatible
         ModLoadingContext.get().registerExtensionPoint(IExtensionPoint.DisplayTest.class, () -> new IExtensionPoint.DisplayTest(() -> NetworkConstants.IGNORESERVERONLY, (a, b) -> true));
 
-        MinecraftForgeClient.registerTooltipComponentFactory(MapComponent.class, Function.identity());
+        MinecraftForgeClient.registerTooltipComponentFactory(MapTooltipComponent.class, Function.identity());
     }
 
     @SubscribeEvent
@@ -32,6 +32,6 @@ public class MapTooltip {
         if (!item.is(Items.FILLED_MAP)) return;
 
         final List<Either<FormattedText, TooltipComponent>> elements = event.getTooltipElements();
-        elements.add(1, Either.right(new MapComponent(item)));
+        elements.add(1, Either.right(new MapTooltipComponent(item)));
     }
 }

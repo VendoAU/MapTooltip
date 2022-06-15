@@ -15,8 +15,8 @@ import java.util.List;
 @Mixin(Screen.class)
 public class ScreenMixin {
 
-    @Inject(method = "method_32635", at = @At("HEAD"), cancellable = true)
-    private static void something(List<TooltipComponent> list, TooltipData data, CallbackInfo ci) {
+    @Inject(method = "method_32635", at = @At("HEAD"), cancellable = true, remap = false)
+    private static void injectComponent(List<TooltipComponent> list, TooltipData data, CallbackInfo ci) {
         if (data instanceof MapTooltipData mapTooltipData) {
             list.add(1, new MapTooltipComponent(mapTooltipData));
             ci.cancel();
