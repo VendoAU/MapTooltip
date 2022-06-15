@@ -10,7 +10,11 @@ val minecraftVersion: String by project
 
 val modId: String by project
 
-val archivesBaseName = "${modId}-forge-${minecraftVersion}"
+version = "2.0.0"
+
+base {
+    archivesName.set("maptooltip-forge-${minecraftVersion}")
+}
 
 dependencies {
     "minecraft"("net.minecraftforge:forge:${minecraftVersion}-${forgeVersion}")
@@ -34,10 +38,8 @@ minecraft {
 
 tasks {
     processResources {
-        inputs.property("version", rootProject.version)
-
         filesMatching("META-INF/mods.toml") {
-            expand("version" to rootProject.version)
+            expand(project.properties)
         }
     }
 

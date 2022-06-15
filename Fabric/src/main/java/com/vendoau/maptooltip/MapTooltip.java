@@ -1,4 +1,9 @@
 package com.vendoau.maptooltip;
 
-public class MapTooltip {
+import net.fabricmc.api.ModInitializer;
+
+public class MapTooltip implements ModInitializer {
+
+    @Override
+    public void onInitialize() {}
 }

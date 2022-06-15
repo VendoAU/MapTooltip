@@ -7,6 +7,11 @@
   "authors": [
     "VendoAU"
   ],
+  "contact": {
+    "homepage": "https://curseforge.com/minecraft/mc-mods/map-tooltip",
+    "sources": "https://github.com/VendoAU/MapTooltip",
+    "issues": "https://github.com/VendoAU/MapTooltip/issues"
+  },
   "license": "MIT",
   "icon": "assets/maptooltip/icon.png",
   "environment": "client",
@@ -15,6 +20,9 @@
       "com.vendoau.maptooltip.MapTooltip"
     ]
   },
+  "mixins": [
+    "maptooltip.mixins.json"
+  ],
   "depends": {
     "fabricloader": ">=0.14.7",
     "minecraft": "~1.19",
