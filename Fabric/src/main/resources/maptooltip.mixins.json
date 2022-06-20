@@ -4,8 +4,7 @@
   "package": "com.vendoau.maptooltip.mixin",
   "compatibilityLevel": "JAVA_17",
   "client": [
-    "FilledMapItemMixin",
-    "ScreenMixin"
+    "FilledMapItemMixin"
   ],
   "injectors": {
     "defaultRequire": 1
