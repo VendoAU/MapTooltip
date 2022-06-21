@@ -9,12 +9,11 @@ public class MapTooltip implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        TooltipComponentCallback.EVENT.register(MapTooltip::renderTooltip);
+        TooltipComponentCallback.EVENT.register(this::renderTooltip);
     }
 
-    public static TooltipComponent renderTooltip(TooltipData data) {
-        if (data instanceof MapTooltipData mapTooltipData)
-        {
+    private TooltipComponent renderTooltip(TooltipData data) {
+        if (data instanceof MapTooltipData mapTooltipData) {
             return new MapTooltipComponent(mapTooltipData);
         }
         return null;
