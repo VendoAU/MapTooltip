@@ -36,7 +36,7 @@ public class MapTooltipComponent implements TooltipComponent {
     }
 
     @Override
-    public void drawItems(TextRenderer textRenderer, int x, int y, MatrixStack matrices, ItemRenderer itemRenderer, int z) {
+    public void drawItems(TextRenderer textRenderer, int x, int y, MatrixStack matrices, ItemRenderer itemRenderer) {
         final World world = MinecraftClient.getInstance().world;
         if (world == null) return;
 
@@ -46,7 +46,7 @@ public class MapTooltipComponent implements TooltipComponent {
 
         // Background
         matrices.push();
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1, 1, 1, 1);
         RenderSystem.setShaderTexture(0, bg);
         DrawableHelper.drawTexture(matrices, x, y, 0, 0, 64, 64, 64, 64);

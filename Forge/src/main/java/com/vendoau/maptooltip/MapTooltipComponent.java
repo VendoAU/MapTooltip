@@ -29,7 +29,7 @@ public class MapTooltipComponent implements ClientTooltipComponent, TooltipCompo
     }
 
     @Override
-    public void renderImage(@NotNull Font font, int x, int y, @NotNull PoseStack poseStack, @NotNull ItemRenderer itemRenderer, int p_194053_) {
+    public void renderImage(@NotNull Font font, int x, int y, @NotNull PoseStack poseStack, @NotNull ItemRenderer itemRenderer) {
         final Level level = Minecraft.getInstance().level;
         if (level == null) return;
 

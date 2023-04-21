@@ -10,7 +10,7 @@ val minecraftVersion: String by project
 
 val modId: String by project
 
-version = "2.0.1"
+version = "2.0.2"
 
 base {
     archivesName.set("maptooltip-forge-${minecraftVersion}")

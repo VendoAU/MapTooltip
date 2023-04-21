@@ -7,7 +7,7 @@ val yarnMappings: String by project
 val fabricLoaderVersion: String by project
 val fabricVersion: String by project
 
-version = "2.0.1"
+version = "2.0.2"
 
 base {
     archivesName.set("maptooltip-fabric-${minecraftVersion}")
