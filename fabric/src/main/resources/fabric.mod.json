@@ -1,36 +1,32 @@
 {
     "schemaVersion": 1,
-    "id": "mod_id",
+    "id": "maptooltip",
     "version": "${version}",
-    "name": "${mod_name}",
-    "description": "This is an example description! Tell everyone what your mod is about!",
+    "name": "Map Tooltip",
+    "description": "View maps from your inventory",
     "authors": [
-        "${mod_author}"
+        "VendoAU"
     ],
     "contact": {
-        "homepage": "https://fabricmc.net/",
-        "sources": "https://github.com/FabricMC/fabric-example-mod"
+        "homepage": "https://modrinth.com/mod/map-tooltip",
+        "sources": "https://github.com/VendoAU/MapTooltip",
+        "issues": "https://github.com/VendoAU/MapTooltip/issues"
     },
-    "license": "CC0-1.0",
-    "icon": "assets/modid/icon.png",
-    "environment": "*",
+    "license": "MIT",
+    "icon": "assets/maptooltip/icon.png",
+    "environment": "client",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+            "com.vendoau.maptooltip.MapTooltip"
         ]
     },
     "mixins": [
-        "examplemod.mixins.json",
-        "examplemod.fabric.mixins.json"
+        "maptooltip.fabric.mixins.json"
     ],
     "depends": {
-        "fabricloader": ">=0.14",
+        "fabricloader": ">=0.14.7",
         "fabric": "*",
-        "minecraft": "1.20",
+        "minecraft": "~1.20",
         "java": ">=17"
-    },
-    "suggests": {
-        "another-mod": "*"
     }
 }
-  
