@@ -3,13 +3,7 @@
     "minVersion": "0.8",
     "package": "com.vendoau.maptooltip.mixin",
     "refmap": "${mod_id}.refmap.json",
-    "compatibilityLevel": "JAVA_17",
-    "mixins": [
-    ],
-    "client": [
-    ],
-    "server": [
-    ],
+    "compatibilityLevel": "JAVA_21",
     "injectors": {
         "defaultRequire": 1
     }

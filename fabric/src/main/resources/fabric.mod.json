@@ -1,19 +1,19 @@
 {
     "schemaVersion": 1,
-    "id": "maptooltip",
+    "id": "${mod_id}",
     "version": "${version}",
-    "name": "Map Tooltip",
-    "description": "View maps from your inventory",
+    "name": "${mod_name}",
+    "description": "${description}",
     "authors": [
-        "VendoAU"
+        "${mod_author}"
     ],
     "contact": {
         "homepage": "https://modrinth.com/mod/map-tooltip",
         "sources": "https://github.com/VendoAU/MapTooltip",
         "issues": "https://github.com/VendoAU/MapTooltip/issues"
     },
-    "license": "MIT",
-    "icon": "assets/maptooltip/icon.png",
+    "license": "${license}",
+    "icon": "${mod_id}.png",
     "environment": "client",
     "entrypoints": {
         "main": [
@@ -21,12 +21,13 @@
         ]
     },
     "mixins": [
-        "maptooltip.fabric.mixins.json"
+        "${mod_id}.mixins.json",
+        "${mod_id}.fabric.mixins.json"
     ],
     "depends": {
-        "fabricloader": ">=0.14.7",
-        "fabric": "*",
-        "minecraft": "~1.20",
-        "java": ">=17"
+        "fabricloader": ">=${fabric_loader_version}",
+        "fabric-api": "*",
+        "minecraft": "${minecraft_version}",
+        "java": ">=${java_version}"
     }
 }

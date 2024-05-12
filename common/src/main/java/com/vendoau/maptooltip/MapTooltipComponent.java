@@ -10,6 +10,7 @@ import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.NotNull;
 
@@ -17,12 +18,12 @@ public class MapTooltipComponent implements ClientTooltipComponent, TooltipCompo
 
     private final ResourceLocation bg = new ResourceLocation("textures/map/map_background.png");
 
-    private final Integer id;
+    private final MapId id;
     private final MapItemSavedData data;
 
     public MapTooltipComponent(ItemStack map) {
-        id = MapItem.getMapId(map);
-        data = MapItem.getSavedData(id, Minecraft.getInstance().level);
+        id = new MapId(MapItem.getId(map.getItem()));
+        data = MapItem.getSavedData(map, Minecraft.getInstance().level);
     }
 
     @Override
