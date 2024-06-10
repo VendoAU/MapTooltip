@@ -4,11 +4,7 @@
   "package": "com.vendoau.maptooltip.mixin",
   "refmap": "${mod_id}.refmap.json",
   "compatibilityLevel": "JAVA_21",
-  "client": [
-    "ClientLevelAccessor", "ClientPacketListenerMixin"
-  ],
   "injectors": {
     "defaultRequire": 1
   }
 }
-

@@ -13,3 +13,9 @@ description = '''${description}'''
 displayURL = "https://modrinth.com/mod/map-tooltip"
 updateJSONURL = "https://api.modrinth.com/updates/map-tooltip/forge_updates.json"
 displayTest = "IGNORE_ALL_VERSION"
+
+[[mixins]]
+config = "${mod_id}.mixins.json"
+
+[[mixins]]
+config = "${mod_id}.neoforge.mixins.json"
