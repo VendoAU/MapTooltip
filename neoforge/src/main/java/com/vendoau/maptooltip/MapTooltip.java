@@ -8,8 +8,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.neoforge.client.event.ClientPlayerNetworkEvent;
+import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderTooltipEvent;
-import net.neoforged.neoforge.event.TickEvent;
 
 @Mod(Constants.MOD_ID)
 @EventBusSubscriber(modid = Constants.MOD_ID)
@@ -32,7 +32,7 @@ public class MapTooltip {
     }
 
     @SubscribeEvent
-    public static void tick(TickEvent.ClientTickEvent event) {
+    public static void tick(ClientTickEvent.Post event) {
         if (loadNextTick) {
             final Minecraft mc = Minecraft.getInstance();
             MapCache.load(mc.getCurrentServer(), mc.level);

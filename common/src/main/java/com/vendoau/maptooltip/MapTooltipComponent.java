@@ -5,24 +5,21 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.MapItem;
 import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.NotNull;
 
 public class MapTooltipComponent implements ClientTooltipComponent, TooltipComponent {
 
-    private final ResourceLocation bg = new ResourceLocation("textures/map/map_background.png");
-
+    private final ResourceLocation bg = ResourceLocation.parse("textures/map/map_background.png");
     private final MapId id;
-    private final MapItemSavedData data;
 
     public MapTooltipComponent(ItemStack map) {
-        id = new MapId(MapItem.getId(map.getItem()));
-        data = MapItem.getSavedData(map, Minecraft.getInstance().level);
+        id = map.get(DataComponents.MAP_ID);
     }
 
     @Override
@@ -34,6 +31,7 @@ public class MapTooltipComponent implements ClientTooltipComponent, TooltipCompo
         graphics.blit(bg, x, y, 0, 0, 64, 64, 64, 64);
         poseStack.popPose();
 
+        final MapItemSavedData data = Minecraft.getInstance().level.getMapData(id);
         if (data == null) return;
 
         // Map
