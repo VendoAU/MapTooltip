@@ -34,17 +34,35 @@ public class MapCache {
         if (!Files.exists(serverDir)) return;
         try (final DirectoryStream<Path> paths = Files.newDirectoryStream(serverDir)) {
             cachedIds.clear();
-            for (Path path : paths) {
-                final MapId mapId = getMapIdFromPath(path);
-                final CompoundTag tag = NbtIo.readCompressed(path, NbtAccounter.unlimitedHeap()).getCompound("data");
-                final MapItemSavedData data = MapItemSavedData.load(tag, level.registryAccess());
-                final Map<MapId, MapItemSavedData> mapIds = ((ClientLevelAccessor) level).getDataForMaps();
-                mapIds.put(mapId, data);
-                cachedIds.add(mapId);
-                LOGGER.info("Loaded map data ({})", mapId.id());
-            }
+            paths.forEach(path -> load(path, level));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            LOGGER.error("Failed to load map data");
+            LOGGER.error("{}: {}", e.getClass().getSimpleName(), e.getMessage());
+        }
+    }
+
+    private static void load(Path path, ClientLevel level) {
+        final MapId mapId = getMapIdFromPath(path);
+        try {
+            final CompoundTag tag = NbtIo.readCompressed(path, NbtAccounter.unlimitedHeap()).getCompound("data");
+            final MapItemSavedData data = MapItemSavedData.load(tag, level.registryAccess());
+            final Map<MapId, MapItemSavedData> mapIds = ((ClientLevelAccessor) level).getDataForMaps();
+            mapIds.put(mapId, data);
+            cachedIds.add(mapId);
+            LOGGER.info("Loaded map data ({})", mapId.id());
+        } catch (IOException e) {
+            LOGGER.error("Failed to load map data ({})", mapId.id());
+            LOGGER.error("Data is probably corrupted, deleting...");
+            delete(path);
+        }
+    }
+
+    private static void delete(Path path) {
+        try {
+            Files.deleteIfExists(path);
+            LOGGER.info("File successfully deleted");
+        } catch (IOException e) {
+            LOGGER.error("Failed to delete file");
         }
     }
 
@@ -92,7 +110,8 @@ public class MapCache {
                 data.save(serverDir.resolve(mapId.key() + ".dat").toFile(), provider);
                 LOGGER.info("Saved map data ({})", mapId.id());
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                LOGGER.error("Failed to save map data ({})", mapId.id());
+                LOGGER.error("{}: {}", e.getClass().getSimpleName(), e.getMessage());
             }
         });
     }
