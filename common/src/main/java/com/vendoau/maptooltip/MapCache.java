@@ -107,7 +107,9 @@ public class MapCache {
                 final Path serverDir = getServerDir(server);
                 Files.createDirectories(serverDir);
                 final RegistryAccess provider = level.registryAccess();
-                data.save(serverDir.resolve(mapId.key() + ".dat").toFile(), provider);
+                final CompoundTag savedData = data.save(provider);
+                final Path path = serverDir.resolve(mapId.key() + ".dat");
+                NbtIo.writeCompressed(savedData, path);
                 LOGGER.info("Saved map data ({})", mapId.id());
             } catch (IOException e) {
                 LOGGER.error("Failed to save map data ({})", mapId.id());
