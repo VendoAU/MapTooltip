@@ -37,7 +37,6 @@ public class MapCache {
         if (!Files.exists(serverDir)) return;
 
         try {
-            // Сначала создаём копию списка файлов, чтобы DirectoryStream не закрылся
             List<Path> paths = new ArrayList<>();
             try (DirectoryStream<Path> stream = Files.newDirectoryStream(serverDir)) {
                 for (Path path : stream) {
