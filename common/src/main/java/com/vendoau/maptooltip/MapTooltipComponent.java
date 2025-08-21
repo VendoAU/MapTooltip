@@ -1,12 +1,11 @@
 package com.vendoau.maptooltip;
 
-import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.renderer.MapRenderer;
-import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderPipelines;
 import net.minecraft.client.renderer.state.MapRenderState;
 import net.minecraft.core.component.DataComponents;
 import net.minecraft.resources.ResourceLocation;
@@ -15,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.NotNull;
+import org.joml.Matrix3x2fStack;
 
 public class MapTooltipComponent implements ClientTooltipComponent, TooltipComponent {
 
@@ -30,24 +30,24 @@ public class MapTooltipComponent implements ClientTooltipComponent, TooltipCompo
     @Override
     public void renderImage(@NotNull Font font, int x, int y, int p_368529_, int p_368584_,
                             @NotNull GuiGraphics graphics) {
-        final PoseStack poseStack = graphics.pose();
+        final Matrix3x2fStack poseStack = graphics.pose();
 
         // Background
-        poseStack.pushPose();
-        graphics.blit(RenderType::guiTextured, bg, x, y, 0, 0, 64, 64, 64, 64);
-        poseStack.popPose();
+        poseStack.pushMatrix();
+        graphics.blit(RenderPipelines.GUI_TEXTURED, bg, x, y, 0, 0, 64, 64, 64, 64);
+        poseStack.popMatrix();
 
         final MapItemSavedData data = Minecraft.getInstance().level.getMapData(id);
         if (data == null) return;
 
         // Map
-        poseStack.pushPose();
-        poseStack.translate(x + 3.2F, y + 3.2F, 401);
-        poseStack.scale(0.45F, 0.45F, 1);
+        poseStack.pushMatrix();
+        poseStack.translate(x + 3.2F, y + 3.2F);//, 401);
+        poseStack.scale(0.45F, 0.45F);//, 1);
         final MapRenderer mapRenderer = Minecraft.getInstance().getMapRenderer();
         mapRenderer.extractRenderState(id, data, this.mapRenderState);
-        graphics.drawSpecial(buffer -> mapRenderer.render(mapRenderState, poseStack, buffer, true, 0xF000F0));
-        poseStack.popPose();
+        graphics.submitMapRenderState(mapRenderState);
+        poseStack.popMatrix();
     }
 
     @Override

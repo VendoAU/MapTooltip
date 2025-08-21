@@ -1,5 +1,6 @@
 package com.vendoau.maptooltip;
 
+import com.mojang.serialization.JavaOps;
 import com.vendoau.maptooltip.mixin.ClientLevelAccessor;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -65,8 +66,8 @@ public class MapCache {
     private static void load(Path path, ClientLevel level) {
         final MapId mapId = getMapIdFromPath(path);
         try {
-            final CompoundTag tag = NbtIo.readCompressed(path, NbtAccounter.unlimitedHeap()).getCompound("data");
-            final MapItemSavedData data = MapItemSavedData.load(tag, level.registryAccess());
+            final CompoundTag tag = NbtIo.readCompressed(path, NbtAccounter.unlimitedHeap()).getCompoundOrEmpty("data");
+            final MapItemSavedData data = MapItemSavedData.CODEC.parse(level.registryAccess().createSerializationContext(JavaOps.INSTANCE), tag).getOrThrow();
 
             synchronized (level) {
                 final Map<MapId, MapItemSavedData> mapIds = ((ClientLevelAccessor) level).getDataForMaps();
@@ -135,7 +136,7 @@ public class MapCache {
                 final Path serverDir = getServerDir(server);
                 Files.createDirectories(serverDir);
                 final RegistryAccess provider = level.registryAccess();
-                final CompoundTag savedData = data.save(provider);
+                final CompoundTag savedData = (CompoundTag) MapItemSavedData.CODEC.encodeStart(provider.createSerializationContext(JavaOps.INSTANCE), data).getOrThrow();
                 final Path path = serverDir.resolve(mapId.key() + ".dat");
                 NbtIo.writeCompressed(savedData, path);
                 LOGGER.info("Saved map data ({})", mapId.id());
