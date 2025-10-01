@@ -1,12 +1,14 @@
 package com.vendoau.maptooltip;
 
 import com.vendoau.maptooltip.mixin.ClientLevelAccessor;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtAccounter;
 import net.minecraft.nbt.NbtIo;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.saveddata.maps.MapId;
 import net.minecraft.world.level.saveddata.maps.MapItemSavedData;
 import org.jetbrains.annotations.Nullable;
@@ -18,6 +20,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import static com.vendoau.maptooltip.Constants.CONFIG_DIR;
 import static com.vendoau.maptooltip.Constants.LOGGER;
@@ -32,9 +35,27 @@ public class MapCache {
         LOGGER.info("Loading map data for {}", server.ip);
         final Path serverDir = getServerDir(server);
         if (!Files.exists(serverDir)) return;
-        try (final DirectoryStream<Path> paths = Files.newDirectoryStream(serverDir)) {
+
+        try {
+            List<Path> paths = new ArrayList<>();
+            try (DirectoryStream<Path> stream = Files.newDirectoryStream(serverDir)) {
+                for (Path path : stream) {
+                    paths.add(path);
+                }
+            }
+
             cachedIds.clear();
-            paths.forEach(path -> load(path, level));
+            CompletableFuture.runAsync(() -> {
+                for (Path path : paths) {
+                    load(path, level);
+                }
+                Minecraft.getInstance().execute(() -> {
+                    if (Minecraft.getInstance().player != null) {
+                        Minecraft.getInstance().player.displayClientMessage(Component.translatable("message.maptooltip.loaded"), false);
+                    }
+                });
+            });
+
         } catch (IOException e) {
             LOGGER.error("Failed to load map data");
             LOGGER.error("{}: {}", e.getClass().getSimpleName(), e.getMessage());
@@ -46,9 +67,16 @@ public class MapCache {
         try {
             final CompoundTag tag = NbtIo.readCompressed(path, NbtAccounter.unlimitedHeap()).getCompound("data");
             final MapItemSavedData data = MapItemSavedData.load(tag, level.registryAccess());
-            final Map<MapId, MapItemSavedData> mapIds = ((ClientLevelAccessor) level).getDataForMaps();
-            mapIds.put(mapId, data);
-            cachedIds.add(mapId);
+
+            synchronized (level) {
+                final Map<MapId, MapItemSavedData> mapIds = ((ClientLevelAccessor) level).getDataForMaps();
+                mapIds.put(mapId, data);
+            }
+
+            synchronized (cachedIds) {
+                cachedIds.add(mapId);
+            }
+
             LOGGER.info("Loaded map data ({})", mapId.id());
         } catch (IOException e) {
             LOGGER.error("Failed to load map data ({})", mapId.id());
