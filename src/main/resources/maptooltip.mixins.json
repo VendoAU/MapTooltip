@@ -1,0 +1,11 @@
+{
+    "required": true,
+    "package": "com.vendoau.maptooltip.mixin",
+    "compatibilityLevel": "${java}",
+    "mixins": [
+        "MapItemMixin"
+    ],
+    "injectors": {
+        "defaultRequire": 1
+    }
+}

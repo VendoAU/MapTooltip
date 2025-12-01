@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "${id}",
+  "version": "${version}",
+  "name": "${name}",
+  "description": "${description}",
+  "authors": [
+    "VendoAU"
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/map-tooltip",
+    "sources": "https://github.com/VendoAU/MapTooltip",
+    "issues": "https://github.com/VendoAU/MapTooltip/issues"
+  },
+  "license": "MIT",
+  "icon": "assets/maptooltip/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.vendoau.maptooltip.MapTooltip"
+    ]
+  },
+  "mixins": [
+    "maptooltip.mixins.json"
+  ],
+  "accessWidener": "maptooltip.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.17",
+    "minecraft": "${minecraft}"
+  }
+}
