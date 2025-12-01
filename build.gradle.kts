@@ -52,7 +52,7 @@ loom {
         options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
     }
 
-    runConfigs.all {
+    runs.named("client") {
         ideConfigGenerated(true)
         vmArgs("-Dmixin.debug.export=true") // Exports transformed classes for debugging
         runDir = "../../run" // Shares the run directory between versions
