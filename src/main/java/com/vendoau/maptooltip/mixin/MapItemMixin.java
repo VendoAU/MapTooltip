@@ -1,5 +1,6 @@
 package com.vendoau.maptooltip.mixin;
 
+//? >= 1.17 {
 import com.vendoau.maptooltip.MapTooltipComponent;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
@@ -22,3 +23,4 @@ public class MapItemMixin extends Item {
         return Optional.of(new MapTooltipComponent(item));
     }
 }
+//?}

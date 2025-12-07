@@ -2,6 +2,7 @@ package com.vendoau.maptooltip;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 
@@ -81,12 +82,7 @@ public class GraphicsHelper {
     }
 
     public void blit(ResourceLocation sprite, int x, int y, int width, int height) {
-        //? < 1.20 {
-        /*RenderSystem.setShader(GameRenderer::getPositionTexShader);
-        RenderSystem.setShaderColor(1, 1, 1, 1);
-        RenderSystem.setShaderTexture(0, sprite);
-        GuiComponent.blit(pose, x, y, 0, 0, width, height, width, height);
-        *///?} else {
+        //? >= 1.20 {
         push();
         guiGraphics.blit(
                 //? >= 1.21.2
@@ -101,6 +97,26 @@ public class GraphicsHelper {
                 width,
                 height
         );
-        //?}
+        //?} else >= 1.17 {
+        /*RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderColor(1, 1, 1, 1);
+        RenderSystem.setShaderTexture(0, sprite);
+        GuiComponent.blit(pose, x, y, 0, 0, width, height, width, height);
+        *///?} else {
+        /*Minecraft.getInstance().getTextureManager().bind(sprite);
+        GuiComponent.blit(pose, x, y, 0, 0, width, height, width, height);
+        *///?}
     }
+
+    //? >= 1.20 {
+    public GuiGraphics guiGraphics() {
+        return guiGraphics;
+    }
+    //?}
+
+    //? < 1.21.2 {
+    /*public PoseStack pose() {
+        return pose;
+    }
+    *///?}
 }

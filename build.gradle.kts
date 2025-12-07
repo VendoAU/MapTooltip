@@ -1,6 +1,8 @@
 plugins {
     id("fabric-loom")
 
+    id("dev.kikugie.fletching-table") version "0.1.0-alpha.22"
+
     // `maven-publish`
     // id("me.modmuss50.mod-publish-plugin")
 }
@@ -56,6 +58,12 @@ loom {
         ideConfigGenerated(true)
         vmArgs("-Dmixin.debug.export=true") // Exports transformed classes for debugging
         runDir = "../../run" // Shares the run directory between versions
+    }
+}
+
+fletchingTable {
+    j52j.register("main") {
+        extension("json", "maptooltip.mixins.json5")
     }
 }
 
