@@ -74,7 +74,7 @@ public class MapTooltip implements ModInitializer {
                 x + offsetX + 4,
                 y + offsetY + 4
                 //? < 1.20
-                /*, 402*/
+                //, 402
         );
         graphics.scale(0.45F);
 
@@ -87,10 +87,10 @@ public class MapTooltip implements ModInitializer {
                 graphics.pose(),
                 graphics.guiGraphics().bufferSource(),
                 //? < 1.21 {
-                id,
-                //?} else {
-                /^new MapId(id),
-               ^///?}
+                /^id,
+                ^///?} else {
+                new MapId(id),
+               //?}
                 data,
                 true,
                 0xf000f0);

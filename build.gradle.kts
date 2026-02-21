@@ -103,6 +103,10 @@ tasks {
     }
 }
 
+stonecutter {
+
+}
+
 /*
 // Publishes builds to Modrinth and Curseforge with changelog from the CHANGELOG.md file
 publishMods {

@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.resources.ResourceLocation;
 
 //? < 1.20
-/*import net.minecraft.client.gui.GuiComponent;*/
+//import net.minecraft.client.gui.GuiComponent;
 
 //? >= 1.20
 import net.minecraft.client.gui.GuiGraphics;
@@ -40,19 +40,13 @@ public class GraphicsHelper {
     //?}
 
     public void push() {
-        //? < 1.21.2 {
-        /*pose.pushPose();
-        *///?} else {
+        //~ if < 1.21.2 '.pushMatrix' -> '.pushPose'
         pose.pushMatrix();
-         //?}
     }
 
     public void pop() {
-        //? < 1.21.2 {
-        /*pose.popPose();
-        *///?} else {
+        //~ if < 1.21.2 '.popMatrix' -> '.popPose'
         pose.popMatrix();
-         //?}
     }
 
     public void translate(float x, float y) {
@@ -64,7 +58,7 @@ public class GraphicsHelper {
                 x,
                 y
                 //? < 1.21.2
-                /*, z*/
+                //, z
         );
     }
 
@@ -77,7 +71,7 @@ public class GraphicsHelper {
                 x,
                 y
                 //? < 1.21.2
-                /*, 1*/
+                //, 1
         );
     }
 

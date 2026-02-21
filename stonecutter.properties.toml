@@ -1,0 +1,37 @@
+mod.version="5.0.0"
+mod.group="com.vendoau.maptooltip"
+mod.id="maptooltip"
+mod.name="Map Tooltip"
+
+# TODO: Latest version
+
+# TODO: Check 1.21.2-1.21.10
+["1.21.10"]
+deps.fabric_api="0.138.3+1.21.10"
+mod.mc_dep=">=1.21.9 <=1.21.10"
+
+["1.21"]
+deps.fabric_api="0.110.0+1.21.1"
+mod.mc_dep=">=1.21 <=1.21.1"
+
+["1.20"]
+deps.fabric_api="0.92.2+1.20.1"
+mod.mc_dep=">=1.20 <=1.20.1"
+
+["1.19"]
+deps.fabric_api="0.58.0+1.19"
+mod.mc_dep=">=1.19 <=1.19.4"
+
+["1.18"]
+deps.fabric_api="0.44.0+1.18"
+mod.mc_dep=">=1.18 <=1.18.2"
+
+["1.17"]
+deps.fabric_api="0.46.1+1.17"
+mod.mc_dep=">=1.17 <=1.17.1"
+
+["1.16"]
+deps.fabric_api="0.42.0+1.16"
+mod.mc_dep=">=1.16 <=1.16.5"
+
+
