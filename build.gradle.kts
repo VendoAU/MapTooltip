@@ -1,19 +1,17 @@
 plugins {
-    id("fabric-loom")
-
-    id("dev.kikugie.fletching-table") version "0.1.0-alpha.22"
+    id("net.fabricmc.fabric-loom-remap")
 
     // `maven-publish`
     // id("me.modmuss50.mod-publish-plugin")
 }
 
-version = "${property("mod.version")}+${stonecutter.current.version}"
+version = "${property("mod.version")}+${sc.current.version}"
 base.archivesName = property("mod.id") as String
 
 val requiredJava = when {
-    stonecutter.eval(stonecutter.current.version, ">=1.20.6") -> JavaVersion.VERSION_21
-    stonecutter.eval(stonecutter.current.version, ">=1.18") -> JavaVersion.VERSION_17
-    stonecutter.eval(stonecutter.current.version, ">=1.17") -> JavaVersion.VERSION_16
+    sc.current.parsed >= "1.20.5" -> JavaVersion.VERSION_21
+    sc.current.parsed >= "1.18" -> JavaVersion.VERSION_17
+    sc.current.parsed >= "1.17" -> JavaVersion.VERSION_16
     else -> JavaVersion.VERSION_1_8
 }
 
@@ -39,7 +37,7 @@ dependencies {
         for (it in modules) modImplementation(fabricApi.module(it, property("deps.fabric_api") as String))
     }
 
-    minecraft("com.mojang:minecraft:${stonecutter.current.version}")
+    minecraft("com.mojang:minecraft:${sc.current.version}")
     mappings(loom.officialMojangMappings())
     modImplementation("net.fabricmc:fabric-loader:${property("deps.fabric_loader")}")
 
@@ -48,22 +46,16 @@ dependencies {
 
 loom {
     fabricModJsonPath = rootProject.file("src/main/resources/fabric.mod.json") // Useful for interface injection
-    accessWidenerPath = rootProject.file("src/main/resources/maptooltip.accesswidener")
+//    accessWidenerPath = rootProject.file("src/main/resources/template.accesswidener")
 
     decompilerOptions.named("vineflower") {
         options.put("mark-corresponding-synthetics", "1") // Adds names to lambdas - useful for mixins
     }
 
-    runs.named("client") {
+    runConfigs.all {
         ideConfigGenerated(true)
         vmArgs("-Dmixin.debug.export=true") // Exports transformed classes for debugging
         runDir = "../../run" // Shares the run directory between versions
-    }
-}
-
-fletchingTable {
-    j52j.register("main") {
-        extension("json", "maptooltip.mixins.json5")
     }
 }
 
@@ -79,13 +71,14 @@ tasks {
         inputs.property("name", project.property("mod.name"))
         inputs.property("version", project.property("mod.version"))
         inputs.property("minecraft", project.property("mod.mc_dep"))
+        inputs.property("description", project.property("mod.description"))
 
         val props = mapOf(
             "id" to project.property("mod.id"),
             "name" to project.property("mod.name"),
-            "description" to project.property("mod.description"),
             "version" to project.property("mod.version"),
-            "minecraft" to project.property("mod.mc_dep")
+            "minecraft" to project.property("mod.mc_dep"),
+            "description" to project.property("mod.description")
         )
 
         filesMatching("fabric.mod.json") { expand(props) }
@@ -101,10 +94,6 @@ tasks {
         into(rootProject.layout.buildDirectory.file("libs/${project.property("mod.version")}"))
         dependsOn("build")
     }
-}
-
-stonecutter {
-
 }
 
 /*

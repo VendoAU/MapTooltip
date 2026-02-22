@@ -2,13 +2,28 @@ mod.version="5.0.0"
 mod.group="com.vendoau.maptooltip"
 mod.id="maptooltip"
 mod.name="Map Tooltip"
+mod.description="View maps from your inventory"
 
-# TODO: Latest version
 
-# TODO: Check 1.21.2-1.21.10
-["1.21.10"]
-deps.fabric_api="0.138.3+1.21.10"
-mod.mc_dep=">=1.21.9 <=1.21.10"
+["1.21.11"]
+deps.fabric_api="0.141.3+1.21.11"
+mod.mc_dep=">=1.21.3 <=1.21.11"
+
+["1.21.6"]
+deps.fabric_api="0.128.2+1.21.6"
+mod.mc_dep=">=1.21.6 <=1.21.10"
+
+["1.21.5"]
+deps.fabric_api="0.128.2+1.21.5"
+mod.mc_dep=">=1.21.5 <=1.21.6"
+
+["1.21.4"]
+deps.fabric_api="0.119.4+1.21.4"
+mod.mc_dep=">=1.21.4 <=1.21.6"
+
+["1.21.3"]
+deps.fabric_api="0.114.1+1.21.3"
+mod.mc_dep=">=1.21.3 <=1.21.6"
 
 ["1.21"]
 deps.fabric_api="0.110.0+1.21.1"
@@ -33,5 +48,3 @@ mod.mc_dep=">=1.17 <=1.17.1"
 ["1.16"]
 deps.fabric_api="0.42.0+1.16"
 mod.mc_dep=">=1.16 <=1.16.5"
-
-

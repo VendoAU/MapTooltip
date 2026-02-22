@@ -17,7 +17,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.vendoau.maptooltip.MapTooltip"
+      "com.vendoau.maptooltip.MapTooltipFabric"
     ]
   },
   "mixins": [

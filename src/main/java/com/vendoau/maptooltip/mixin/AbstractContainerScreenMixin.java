@@ -2,8 +2,7 @@ package com.vendoau.maptooltip.mixin;
 
 //? < 1.17 {
 
-/*import com.mojang.blaze3d.vertex.PoseStack;
-import com.vendoau.maptooltip.GraphicsHelper;
+/*import com.mojang.blaze3d.vertex.GuiGraphics;
 import com.vendoau.maptooltip.MapTooltip;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -27,7 +26,7 @@ public class AbstractContainerScreenMixin {
     protected Slot hoveredSlot;
 
     @Inject(method = "render", at = @At("TAIL"))
-    private void render(PoseStack poseStack, int x, int y, float delta, CallbackInfo ci) {
+    private void render(GuiGraphics poseStack, int x, int y, float delta, CallbackInfo ci) {
         if (hoveredSlot == null) return;
 
         final Level level = Minecraft.getInstance().level;
@@ -36,7 +35,7 @@ public class AbstractContainerScreenMixin {
         final ItemStack hoveredItem = hoveredSlot.getItem();
         if (hoveredItem.getItem() == Items.FILLED_MAP) {
             final Integer id = MapItem.getMapId(hoveredItem);
-            MapTooltip.render(id, x, y, new GraphicsHelper(poseStack));
+            MapTooltip.render(id, x, y, poseStack);
         }
     }
 }

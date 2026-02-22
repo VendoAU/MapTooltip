@@ -19,7 +19,7 @@ public class MapItemMixin extends Item {
     }
 
     @Override
-    public @NotNull Optional<TooltipComponent> getTooltipImage(ItemStack item) {
+    public @NotNull Optional<TooltipComponent> getTooltipImage(@NotNull ItemStack item) {
         return Optional.of(new MapTooltipComponent(item));
     }
 }
