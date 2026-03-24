@@ -4,47 +4,70 @@ mod.id="maptooltip"
 mod.name="Map Tooltip"
 mod.description="View maps from your inventory"
 
+deps.fabric_loader="0.18.4"
 
-["1.21.11"]
+
+["26.1-rc-2-fabric"]
+deps.fabric_api="0.144.0+26.1"
+mod.mc_dep=">=26.1-rc.2"
+
+["1.21.11-fabric"]
 deps.fabric_api="0.141.3+1.21.11"
-mod.mc_dep=">=1.21.3 <=1.21.11"
+mod.mc_dep="1.21.11"
 
-["1.21.6"]
+["1.21.11-neoforge"]
+deps.neoforge="21.11.38-beta"
+mod.mc_dep="1.21.11"
+
+["1.21.6-fabric"]
 deps.fabric_api="0.128.2+1.21.6"
 mod.mc_dep=">=1.21.6 <=1.21.10"
 
-["1.21.5"]
-deps.fabric_api="0.128.2+1.21.5"
-mod.mc_dep=">=1.21.5 <=1.21.6"
+["1.21.6-neoforge"]
+deps.neoforge="21.6.20-beta"
+mod.mc_dep="[1.21.6, 1.21.10]"
 
-["1.21.4"]
-deps.fabric_api="0.119.4+1.21.4"
-mod.mc_dep=">=1.21.4 <=1.21.6"
-
-["1.21.3"]
+["1.21.3-fabric"]
 deps.fabric_api="0.114.1+1.21.3"
-mod.mc_dep=">=1.21.3 <=1.21.6"
+mod.mc_dep=">=1.21.3 <=1.21.5"
 
-["1.21"]
+["1.21.3-neoforge"]
+deps.neoforge="21.3.95"
+mod.mc_dep="[1.21.3, 1.21.5]"
+
+["1.21-fabric"]
 deps.fabric_api="0.110.0+1.21.1"
-mod.mc_dep=">=1.21 <=1.21.1"
+mod.mc_dep=">=1.21 <=1.21.2"
 
-["1.20"]
+["1.21-neoforge"]
+deps.neoforge="21.0.167"
+mod.mc_dep="[1.21, 1.21.2]"
+
+# This is the first supported neoforge version, vanilla doesn't have any relevant changes
+["1.20.6-neoforge"]
+deps.neoforge="20.6.139"
+mod.mc_dep="1.20.6"
+
+["1.20.5-fabric"]
+deps.fabric_api="0.97.8+1.20.5"
+mod.mc_dep=">=1.20.5 <=1.20.6"
+
+["1.20-fabric"]
 deps.fabric_api="0.92.2+1.20.1"
-mod.mc_dep=">=1.20 <=1.20.1"
+mod.mc_dep=">=1.20 <=1.20.4"
 
-["1.19"]
+["1.19-fabric"]
 deps.fabric_api="0.58.0+1.19"
 mod.mc_dep=">=1.19 <=1.19.4"
 
-["1.18"]
+["1.18-fabric"]
 deps.fabric_api="0.44.0+1.18"
 mod.mc_dep=">=1.18 <=1.18.2"
 
-["1.17"]
+["1.17-fabric"]
 deps.fabric_api="0.46.1+1.17"
 mod.mc_dep=">=1.17 <=1.17.1"
 
-["1.16"]
+["1.16-fabric"]
 deps.fabric_api="0.42.0+1.16"
 mod.mc_dep=">=1.16 <=1.16.5"

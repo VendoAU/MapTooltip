@@ -23,7 +23,6 @@
   "mixins": [
     "maptooltip.mixins.json"
   ],
-  "accessWidener": "maptooltip.accesswidener",
   "depends": {
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}"

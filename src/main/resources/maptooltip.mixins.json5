@@ -3,11 +3,13 @@
     "package": "com.vendoau.maptooltip.mixin",
     "compatibilityLevel": "JAVA_21",
     "mixins": [
+        //? fabric {
         //? >= 1.17 {
         "MapItemMixin",
         //?} else {
         /*"AbstractContainerScreenMixin",
         *///?}
+        //? }
     ],
     "injectors": {
         "defaultRequire": 1

@@ -25,13 +25,13 @@ import net.minecraft.client.renderer.state.MapRenderState;
 import net.minecraft.client.renderer.MapRenderer;
 //? }
 
-//? >= 1.21
+//? >= 1.20.5
 import net.minecraft.world.level.saveddata.maps.MapId;
 
 //? >= 1.20 {
-import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.GuiGraphicsExtractor;
 //? } else {
-/*import com.mojang.blaze3d.vertex.GuiGraphics;
+/*import com.mojang.blaze3d.vertex.GuiGraphicsExtractor;
 import net.minecraft.client.gui.GuiComponent;
 *///? }
 
@@ -46,14 +46,14 @@ public class MapTooltip {
     *///? }
 
 
-    public static void render(Integer id, int x, int y, GuiGraphics graphics) {
+    public static void render(Integer id, int x, int y, GuiGraphicsExtractor graphics) {
         if (id == null) return;
 
         final Minecraft mc = Minecraft.getInstance();
         final Level level = mc.level;
         if (level == null) return;
 
-        //? >= 1.21 {
+        //? >= 1.20.5 {
         final MapItemSavedData data = level.getMapData(new MapId(id));
         //? } else {
         /*final MapItemSavedData data = level.getMapData("map_" + id);
@@ -67,13 +67,13 @@ public class MapTooltip {
         renderMap(id, data, x + offsetX + 4, y + offsetY + 4, graphics);
     }
 
-    public static void renderBackground(int x, int y, GuiGraphics graphics) {
+    public static void renderBackground(int x, int y, GuiGraphicsExtractor graphics) {
         GraphicsHelper.push(graphics);
 
         //? >= 1.21.6 {
         graphics.blit(RenderPipelines.GUI_TEXTURED, MAP_SPRITE, x, y, 0, 0, 66, 66, 66, 66);
         //? } else >= 1.21.3 {
-        /*graphics.blitSprite(RenderType::guiTextured, MAP_SPRITE, x, y, 0, 0, 66, 66, 66, 66);
+        /*graphics.blit(RenderType::guiTextured, MAP_SPRITE, x, y, 0, 0, 66, 66, 66, 66);
         *///? } else >= 1.20 {
         /*graphics.blit(MAP_SPRITE, x, y, 0, 0, 66, 66, 66, 66);
         *///? } else >= 1.17 {
@@ -89,23 +89,27 @@ public class MapTooltip {
         GraphicsHelper.pop(graphics);
     }
 
-    public static void renderMap(Integer id, MapItemSavedData data, int x, int y, GuiGraphics graphics) {
+    public static void renderMap(Integer id, MapItemSavedData data, int x, int y, GuiGraphicsExtractor graphics) {
         final Minecraft mc = Minecraft.getInstance();
 
         GraphicsHelper.push(graphics);
         GraphicsHelper.translate(x, y, graphics);
         GraphicsHelper.scale(0.45F, graphics);
 
-        //? >= 1.21.6 {
+        //? > 1.21.11 {
         final MapRenderState mapRenderState = new MapRenderState();
         mc.getMapRenderer().extractRenderState(new MapId(id), data, mapRenderState);
+        graphics.map(mapRenderState);
+        //? } else >= 1.21.6 {
+        /*final MapRenderState mapRenderState = new MapRenderState();
+        mc.getMapRenderer().extractRenderState(new MapId(id), data, mapRenderState);
         graphics.submitMapRenderState(mapRenderState);
-        //? } else >= 1.21.3 {
+        *///? } else >= 1.21.3 {
         /*final MapRenderer mapRenderer = mc.getMapRenderer();
         final MapRenderState mapRenderState = new MapRenderState();
         mapRenderer.extractRenderState(new MapId(id), data, mapRenderState);
         graphics.drawSpecial((multiBufferSource) -> mapRenderer.render(mapRenderState, graphics.pose(), multiBufferSource, true, 0xf000f0));
-        *///? } else >= 1.21 {
+        *///? } else >= 1.20.5 {
         /*mc.gameRenderer.getMapRenderer().render(graphics.pose(), graphics.bufferSource(), new MapId(id), data, true, 0xf000f0);
         *///? } else >= 1.20 {
         /*mc.gameRenderer.getMapRenderer().render(graphics.pose(), graphics.bufferSource(), id, data, true, 0xf000f0);

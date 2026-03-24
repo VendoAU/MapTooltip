@@ -1,6 +1,6 @@
 package com.vendoau.maptooltip.mixin;
 
-//? >= 1.17 {
+//? >= 1.17 && fabric {
 import com.vendoau.maptooltip.MapTooltipComponent;
 import net.minecraft.world.inventory.tooltip.TooltipComponent;
 import net.minecraft.world.item.Item;
