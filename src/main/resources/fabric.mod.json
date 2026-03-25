@@ -24,6 +24,7 @@
     "maptooltip.mixins.json"
   ],
   "depends": {
+    "fabric-api": "*",
     "fabricloader": ">=0.17",
     "minecraft": "${minecraft}"
   }
