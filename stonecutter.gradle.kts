@@ -3,7 +3,7 @@ plugins {
     id("net.fabricmc.fabric-loom-remap") version "1.15-SNAPSHOT" apply false
 }
 
-stonecutter active "26.1-rc-2-fabric"
+stonecutter active "26.1-fabric"
 
 // See https://stonecutter.kikugie.dev/wiki/config/params
 stonecutter parameters {
@@ -12,7 +12,7 @@ stonecutter parameters {
     constants["release"] = property("mod.id") != "template"
     constants.match(node.metadata.project.substringAfterLast("-"), "fabric", "neoforge")
 
-    replacements.string(current.parsed <= "1.21.11") {
+    replacements.string(current.parsed < "26.1") {
         replace("GuiGraphicsExtractor", "GuiGraphics")
         replace("ClientTooltipComponentCallback", "TooltipComponentCallback")
     }

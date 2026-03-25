@@ -35,7 +35,7 @@ public class MapTooltipComponent implements ClientTooltipComponent, TooltipCompo
         *///? }
     }
 
-    //? > 1.21.11 {
+    //? >= 26.1 {
     @Override
     public void extractImage(@NotNull Font font, int x, int y, int w, int h, @NotNull GuiGraphicsExtractor graphics) {
         MapTooltip.render(id, x, y, graphics);

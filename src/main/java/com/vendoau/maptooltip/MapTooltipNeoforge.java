@@ -14,7 +14,7 @@ import net.neoforged.neoforge.common.NeoForge;
 
 import java.util.function.Function;
 
-@Mod(MapTooltipCommon.MOD_ID)
+@Mod("maptooltip")
 public class MapTooltipNeoforge {
 
     public MapTooltipNeoforge(IEventBus modEventBus) {
