@@ -38,7 +38,7 @@ neoForge {
 
 tasks {
     processResources {
-        dependsOn("stonecutterGenerate")
+        exclude("fabric.mod.json")
 
         inputs.property("id", project.property("mod.id"))
         inputs.property("name", project.property("mod.name"))

@@ -36,6 +36,8 @@ loom {
 
 tasks {
     processResources {
+        exclude("META-INF/neoforge.mods.toml")
+
         inputs.property("id", project.property("mod.id"))
         inputs.property("name", project.property("mod.name"))
         inputs.property("version", project.property("mod.version"))
