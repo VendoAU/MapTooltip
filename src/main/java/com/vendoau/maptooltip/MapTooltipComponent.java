@@ -10,8 +10,10 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MapItem;
 import org.jetbrains.annotations.NotNull;
 
-//? >= 1.20.5
+//? >= 1.20.5 {
 import net.minecraft.core.component.DataComponents;
+import net.minecraft.world.level.saveddata.maps.MapId;
+//? }
 
 //? >= 1.20 {
 import net.minecraft.client.gui.GuiGraphicsExtractor;
@@ -29,7 +31,8 @@ public class MapTooltipComponent implements ClientTooltipComponent, TooltipCompo
 
     public MapTooltipComponent(ItemStack item) {
         //? >= 1.20.5 {
-        id = item.get(DataComponents.MAP_ID).id();
+        final MapId mapId = item.get(DataComponents.MAP_ID);
+        id = mapId == null ? null : mapId.id();
         //? } else {
         /*id = MapItem.getMapId(item);
         *///? }
@@ -64,11 +67,17 @@ public class MapTooltipComponent implements ClientTooltipComponent, TooltipCompo
             //? >= 1.21.2
             @NotNull Font font
     ) {
+        if (id == null) {
+            return 0;
+        }
         return 66;
     }
 
     @Override
     public int getWidth(@NotNull Font font) {
+        if (id == null) {
+            return 0;
+        }
         return 66;
     }
 }
